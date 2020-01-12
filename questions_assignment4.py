@@ -64,10 +64,29 @@ def make_MyDate_class():
 
 
 
+def make_Person_class():
+    def __init__(self,_FirstName,_LastName,_DOB,_ID):
+        self['set']('FirstName',_FirstName)
+        self['set']('LastName',_LastName)
+        self['set']('DoB',_DOB)
+        if _ID>0:
+            self['set']('ID',_ID)
 
+    def __repr__(self):
+        return {'FirstName':self['get']('FirstName'),'LastName':self['get']('LastName'),'DoB':self['get']('DoB'),'ID':self['get']('ID')}
 
+    def __str__(self):
+        return ('Name:'+self['get']('FirstName')+' ' + self['get']('LastName') +'\n'
+                'DoB:' + self['get']('DoB')['get']('__str__')() + '\n' 
+                'ID:'+str(self['get']('ID')))
+      
+            
+    return make_class({'__init__': __init__, '__repr__':__repr__ , '__str__':__str__})
 
 
 Date=make_MyDate_class()
-myDate=Date['new'](1,1,1958)
-print(myDate['get']('__repr__')())
+myDate=Date['new'](14,7,1996)
+#print(myDate['get']('__repr__')())
+person=make_Person_class()
+p=person['new']('Patrick','Lugassy',myDate,312131145)
+print(p['get']('__str__')())
