@@ -1,175 +1,177 @@
 #Patrick Lugassy 319266177
 #Ivan Borisenco  317366102
 
-#def make_instance(cls):
-#		"""Return a new object instance, which is a dispatch dictionary."""
-#		attributes = {}
-#		def get_value(name):
-#		    if name in attributes:
-#		        return attributes[name]
-#		    else:
-#		        value = cls['get'](name)
-#		        return bind_method(value, instance)
-#		def set_value(name, value):
-#		    attributes[name] = value
-#		instance = {'get': get_value, 'set': set_value}
-#		return instance
-
-#def bind_method(value, instance):
-#    """Return a bound method if value is callable, or value otherwise."""
-#    if callable(value):
-#        def method(*args):
-#            return value(instance, *args)
-#        return method
-#    else:
-#            return value
-
-#def make_class(attributes, base_class=None):
-#    """Return a new class,which is a dispatch dictionary"""
-#    def get_value(name):
-#        if name in attributes:
-#            return attributes[name]
-#        elif base_class is not None:
-#            return base_class['get'](name)
-#    def set_value(name,value):
-#        attributes[name]=value
-#    def new(*args):
-#        return init_instance(cls,*args)
-#    cls={'get':get_value,'set':set_value,'new':new}
-#    return cls
-
-#def init_instance(cls,*args):
-#    """return a new object with type CLS,initialized with args"""
-#    instance=make_instance(cls)
-#    init=cls['get']('__init__')
-#    if init:
-#        init(instance,*args)
-#    return instance
 
 
-#def make_MyDate_class():
-#    def __init__(self, _day=0,_month=0,_year=2020):
-#        if _day >= 1 and _day <= 30:
-#            self['set']('day',_day)
-#        if _month >= 1 and _month <= 12:
-#            self['set']('month',_month)
-#        if _year >= 1900 and _year <=2100: 
-#            self['set']('year',_year)
+#Question 1:
 
-#    def __repr__(self):
-#        return{'day':self['get']('day'),'month':self['get']('month'),'year':self['get']('year')}
+def make_instance(cls):
+		"""Return a new object instance, which is a dispatch dictionary."""
+		attributes = {}
+		def get_value(name):
+		    if name in attributes:
+		        return attributes[name]
+		    else:
+		        value = cls['get'](name)
+		        return bind_method(value, instance)
+		def set_value(name, value):
+		    attributes[name] = value
+		instance = {'get': get_value, 'set': set_value}
+		return instance
+
+def bind_method(value, instance):
+    """Return a bound method if value is callable, or value otherwise."""
+    if callable(value):
+        def method(*args):
+            return value(instance, *args)
+        return method
+    else:
+            return value
+
+def make_class(attributes, base_class=None):
+    """Return a new class,which is a dispatch dictionary"""
+    def get_value(name):
+        if name in attributes:
+            return attributes[name]
+        elif base_class is not None:
+            return base_class['get'](name)
+    def set_value(name,value):
+        attributes[name]=value
+    def new(*args):
+        return init_instance(cls,*args)
+    cls={'get':get_value,'set':set_value,'new':new}
+    return cls
+
+def init_instance(cls,*args):
+    """return a new object with type CLS,initialized with args"""
+    instance=make_instance(cls)
+    init=cls['get']('__init__')
+    if init:
+        init(instance,*args)
+    return instance
+
+
+def make_MyDate_class():
+    def __init__(self, _day=0,_month=0,_year=2020):
+        if _day >= 1 and _day <= 30:
+            self['set']('day',_day)
+        if _month >= 1 and _month <= 12:
+            self['set']('month',_month)
+        if _year >= 1900 and _year <=2100: 
+            self['set']('year',_year)
+
+    def __repr__(self):
+        return{'day':self['get']('day'),'month':self['get']('month'),'year':self['get']('year')}
     
-#    def __str__(self):
-#        return str(self['get']('day'))+'.'+str(self['get']('month'))+'.'+str(self['get']('year'))
+    def __str__(self):
+        return str(self['get']('day'))+'.'+str(self['get']('month'))+'.'+str(self['get']('year'))
 
 
-#    return make_class({'__init__': __init__, '__repr__':__repr__ , '__str__':__str__})
+    return make_class({'__init__': __init__, '__repr__':__repr__ , '__str__':__str__})
 
 
 
-#def make_Person_class():
-#    def __init__(self,_FirstName,_LastName,_DOB,_ID):
-#        self['set']('FirstName',_FirstName)
-#        self['set']('LastName',_LastName)
-#        self['set']('DoB',_DOB)
-#        if _ID>0:
-#            self['set']('ID',_ID)
+def make_Person_class():
+    def __init__(self,_FirstName,_LastName,_DOB,_ID):
+        self['set']('FirstName',_FirstName)
+        self['set']('LastName',_LastName)
+        self['set']('DoB',_DOB)
+        if _ID>0:
+            self['set']('ID',_ID)
 
-#    def __repr__(self):
-#        return {'FirstName':self['get']('FirstName'),'LastName':self['get']('LastName'),'DoB':self['get']('DoB'),'ID':self['get']('ID')}
+    def __repr__(self):
+        return {'FirstName':self['get']('FirstName'),'LastName':self['get']('LastName'),'DoB':self['get']('DoB'),'ID':self['get']('ID')}
 
-#    def __str__(self):
-#        return ('Name:'+self['get']('FirstName')+' ' + self['get']('LastName') +'\n'
-#                'DoB:' + self['get']('DoB')['get']('__str__')() + '\n' 
-#                'ID:'+str(self['get']('ID')))
+    def __str__(self):
+        return ('Name:'+self['get']('FirstName')+' ' + self['get']('LastName') +'\n'
+                'DoB:' + self['get']('DoB')['get']('__str__')() + '\n' 
+                'ID:'+str(self['get']('ID')))
       
             
-#    return make_class({'__init__': __init__, '__repr__':__repr__ , '__str__':__str__})
+    return make_class({'__init__': __init__, '__repr__':__repr__ , '__str__':__str__})
 
 
 
-#def make_Student_class( personClass):
+def make_Student_class( personClass):
 
-#    def __init__(self,_Department,_Average,_Seniority):
-#        self['set']('Department',_Department)
-#        self['set']('Average',_Average)
-#        self['set']('Studying Seniority',_Seniority)
+    def __init__(self,_Department,_Average,_Seniority):
+        self['set']('Department',_Department)
+        self['set']('Average',_Average)
+        self['set']('Studying Seniority',_Seniority)
 
-#    def __repr__(self):
-#        return {'Department':self['get']('Department'),'Average':self['get']('Average'),'Studying Seniority':self['get']('Studying Seniority')}
+    def __repr__(self):
+        return {'Department':self['get']('Department'),'Average':self['get']('Average'),'Studying Seniority':self['get']('Studying Seniority')}
 
-#    def __str__(self):
-#         return ((personClass['get']('__str__')())+'\n'
-#                 'Learning:'+self['get']('Department')+'\n'
-#                 'Avg:' +str(self['get']('Average'))+'\n'
-#                 'Studying Seniority:'+str(self['get']('Studying Seniority')))
+    def __str__(self):
+         return ((personClass['get']('__str__')())+'\n'
+                 'Learning:'+self['get']('Department')+'\n'
+                 'Avg:' +str(self['get']('Average'))+'\n'
+                 'Studying Seniority:'+str(self['get']('Studying Seniority')))
 
-#    return make_class({'__init__': __init__, '__repr__':__repr__ , '__str__':__str__})
+    return make_class({'__init__': __init__, '__repr__':__repr__ , '__str__':__str__})
 
 
-#def make_Faculty_class(personClass):
+def make_Faculty_class(personClass):
 
-#    def __init__(self,_Teaching,_Salary,_Seniority):
-#        self['set']('Teaching',_Teaching)
-#        self['set']('Salary',_Salary)
-#        self['set']('Teaching Seniority',_Seniority)
+    def __init__(self,_Teaching,_Salary,_Seniority):
+        self['set']('Teaching',_Teaching)
+        self['set']('Salary',_Salary)
+        self['set']('Teaching Seniority',_Seniority)
     
-#    def __repr__(self):
-#        return {'Teaching':self['get']('Teaching'),'Salary':self['get']('Salary'),'Teaching Seniority':self['get']('Teaching Seniority')}
+    def __repr__(self):
+        return {'Teaching':self['get']('Teaching'),'Salary':self['get']('Salary'),'Teaching Seniority':self['get']('Teaching Seniority')}
 
-#    def keys_values(self):
-#        return ( 'Teaching:' + self['get']('Teaching')+ '\n'
-#                'Salary:' + str(self['get']('Salary'))+'\n'
-#                'Seniority:' + str(self['get']('Teaching Seniority')))
+    def attr(self):
+        return ( 'Teaching:' + self['get']('Teaching')+ '\n'
+                'Salary:' + str(self['get']('Salary'))+'\n'
+                'Teaching Seniority:' + str(self['get']('Teaching Seniority')))
 
-#    def __str__(self):
-#        return ((personClass['get']('__str__')())+'\n'
-#                'Teaching:' + self['get']('Teaching')+ '\n'
-#                'Salary:' + str(self['get']('Salary'))+'\n'
-#                'Seniority:' + str(self['get']('Teaching Seniority')))
+    def __str__(self):
+        return ((personClass['get']('__str__')())+'\n'
+                'Teaching:' + self['get']('Teaching')+ '\n'
+                'Salary:' + str(self['get']('Salary'))+'\n'
+                'Teaching Seniority:' + str(self['get']('Teaching Seniority')))
    
-#    return make_class({'__init__': __init__, '__repr__':__repr__ , '__str__':__str__})
+    return make_class({'__init__': __init__, '__repr__':__repr__ , '__str__':__str__,'attr':attr})
 
 
 
-#def make_TA_class(studentClass,facultyClass):
+def make_TA_class(studentClass,facultyClass):
     
-#    def __init__(self):
-#        pass
+    def __init__(self):
+        pass
     
-#    def __repr__(self):
-#        return 
+    def __repr__(self):
+        return 
       
-#    def __str__(self):
-#       return ((studentClass['get']('__str__')())+'\n'+
-#                str(facultyClass['get']('keys_values')()))
+    def __str__(self):
+       return ((studentClass['get']('__str__')())+'\n'
+               +
+               facultyClass['get']('attr')() + '\n')
     
-#    return make_class({'__init__': __init__, '__repr__':__repr__ , '__str__':__str__})
-
-#Date=make_MyDate_class()
-#myDate=Date['new'](14,7,1996)
-##print(myDate['get']('__repr__')())
-#person=make_Person_class()
-#p=person['new']('Patrick','Lugassy',myDate,312131145)
-##print(p['get']('__str__')())
-
-#ab=make_Student_class(p)
-#ivan=ab['new']('Software Engineering' ,85.3 ,1)
-##print(ivan['get']('__str__')())
-
-
-#person2=make_Person_class()
+    return make_class({'__init__': __init__, '__repr__':__repr__ , '__str__':__str__})
 
 
 
-#koko=make_TA_class(ivan,HavaFacult2)
-#koko2=koko['new']()
-#print(koko2['get']('__str__')())
+Date=make_MyDate_class()
+myDate=Date['new'](12,6,1987)
 
 
+person=make_Person_class()
+p=person['new']('Dani','israeli',myDate,312131145)
 
 
+ab=make_Student_class(p)
+i=ab['new']('Software Engineering' ,85.3 ,4)
 
+
+pa=make_Faculty_class(p)
+pp=pa['new']('Industry Engineering',12347,1)
+
+a=make_TA_class(i,pp)
+bb=a['new']()
+
+print(bb['get']('__str__')())
 
 
 
@@ -256,12 +258,17 @@ def SumIntRational(int1,rational2):
     return Rational(int1*drational2+nrational2,drational2)
 
 
-#TODO
+
 def MUltiplyRlist(n,l1):
-      pass
+      temp=l1
+      temp2=()
+      for i in range(n-1):
+          temp2=MergeRlist(temp,l1)
+          temp=temp2
+          temp2=l1
 
+      return temp
 
-    
 
 def MulRational(r1,r2):
      nr1,dr1=r1.number,r1.denom
@@ -316,19 +323,11 @@ apply.implementations={('add',('rational','rlist')):AppendRlist,
                        ('*',('int','rational')):MulIntRational}
 
 
-#adders = add.implementations.items()
-#apply.implementations.update({('+', tags):fn for (tags, fn) in adders})
-
-
-
-#L1=make_rlist(1,make_rlist(2,make_rlist(3,None)))
 L1=make_rlist(1,None)
 R1=Rational(2,4)
 R2=Rational(3,2)
-#print(AppendRlist(R1,L1))
+print(AppendRlist(R1,L1))
 L2=make_rlist(5,make_rlist(6,None))
-#print(MergeRlist(L1,L2))
-#print(AddRational(R1,R2))
- 
-print(apply('+',4,R2))
-
+print(MergeRlist(L1,L2))
+print(AddRational(R1,R2)) 
+print(apply('*',4,L2))
