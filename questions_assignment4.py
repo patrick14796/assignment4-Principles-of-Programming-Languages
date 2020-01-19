@@ -92,9 +92,10 @@ def make_Person_class():
 
 
 
-def make_Student_class( personClass):
+def make_Student_class( ):
 
-    def __init__(self,_Department,_Average,_Seniority):
+    def __init__(self,_FirstName,_LastName,_DOB,_ID,_Department,_Average,_Seniority):
+        Person['get']('__init__',)(self,_FirstName,_LastName,_DOB,_ID)
         self['set']('Department',_Department)
         self['set']('Average',_Average)
         self['set']('Studying Seniority',_Seniority)
@@ -103,7 +104,7 @@ def make_Student_class( personClass):
         return {'Department':self['get']('Department'),'Average':self['get']('Average'),'Studying Seniority':self['get']('Studying Seniority')}
 
     def __str__(self):
-         return ((personClass['get']('__str__')())+'\n'
+         return ((Person(self['get']('__str__')()))+'\n'
                  'Learning:'+self['get']('Department')+'\n'
                  'Avg:' +str(self['get']('Average'))+'\n'
                  'Studying Seniority:'+str(self['get']('Studying Seniority')))
@@ -157,22 +158,13 @@ Date=make_MyDate_class()
 myDate=Date['new'](12,6,1987)
 
 
-person=make_Person_class()
-p=person['new']('Dani','israeli',myDate,312131145)
+Person=make_Person_class()
 
 
-ab=make_Student_class(p)
-i=ab['new']('Software Engineering' ,85.3 ,4)
+Student=make_Student_class()
+Dani=Student['new']('Dani','israeli',myDate,312131145,'Software Engineering' ,85.3 ,4)
 
-
-pa=make_Faculty_class(p)
-pp=pa['new']('Industry Engineering',12347,1)
-
-a=make_TA_class(i,pp)
-bb=a['new']()
-
-print(bb['get']('__str__')())
-
+print(Dani['get']('__str__')())
 
 
 
@@ -180,154 +172,154 @@ print(bb['get']('__str__')())
 
 #Question 2: 
 
-from math import gcd
-empty_rlist=None
-def make_rlist(first, rest):
-    """Make a recursive list from its first 	element and the rest."""
-    if first==None:
-       return empty_rlist
-    return (first, rest)
+# from math import gcd
+# empty_rlist=None
+# def make_rlist(first, rest):
+#     """Make a recursive list from its first 	element and the rest."""
+#     if first==None:
+#        return empty_rlist
+#     return (first, rest)
 
-def first(s):
-		"""Return the first element of a recursive 	list s."""
-		return s[0]
-def rest(s):
-		"""Return the rest of the elements of a 	recursive list s."""
-		return s[1]
+# def first(s):
+# 		"""Return the first element of a recursive 	list s."""
+# 		return s[0]
+# def rest(s):
+# 		"""Return the rest of the elements of a 	recursive list s."""
+# 		return s[1]
 
-def len_rlist(s):
-		"""Return the length of recursive list s."""
-		length = 0
-		while s != empty_rlist:
-			s, length = rest(s), length + 1
-		return length
+# def len_rlist(s):
+# 		"""Return the length of recursive list s."""
+# 		length = 0
+# 		while s != empty_rlist:
+# 			s, length = rest(s), length + 1
+# 		return length
 
-def getitem_rlist(s, i):
-    """Return the element at index i of recursive list s."""
-    while i > 0:
-        s, i = rest(s), i - 1
-    return first(s)
+# def getitem_rlist(s, i):
+#     """Return the element at index i of recursive list s."""
+#     while i > 0:
+#         s, i = rest(s), i - 1
+#     return first(s)
 
 
 
-class Rational(object):
-    def  __init__(self,number,denom):
-        g=gcd(number,denom)
-        self.number=number//g
-        self.denom=denom//g
+# class Rational(object):
+#     def  __init__(self,number,denom):
+#         g=gcd(number,denom)
+#         self.number=number//g
+#         self.denom=denom//g
     
-    def __repr__(self):
-        return 'Rational({0},{1})'.format(self.number,self.denom)
+#     def __repr__(self):
+#         return 'Rational({0},{1})'.format(self.number,self.denom)
 
 
-def isRational(z):
-    return type(z)==Rational
+# def isRational(z):
+#     return type(z)==Rational
 
-def isRlist(z):
-    return type(z)==tuple
+# def isRlist(z):
+#     return type(z)==tuple
 
-def isInt(z):
-    return type(z)==int
+# def isInt(z):
+#     return type(z)==int
 
-def AppendRlist(rational,rlist):
-    if  rest(rlist)==None:
-        return make_rlist(first(rlist),make_rlist(rational,None))
-    else:
-        return make_rlist(first(rlist),AppendRlist(rational,rest(rlist)))
-
-
-def MergeRlist(rlist1,rlist2):
-    if len_rlist(rlist1)==0:
-        return rlist2
-    else:
-        return make_rlist(first(rlist1),MergeRlist(rest(rlist1),rlist2))
+# def AppendRlist(rational,rlist):
+#     if  rest(rlist)==None:
+#         return make_rlist(first(rlist),make_rlist(rational,None))
+#     else:
+#         return make_rlist(first(rlist),AppendRlist(rational,rest(rlist)))
 
 
-def AddRational(rational1,rational2):
-    nrational1,drational1=rational1.number,rational1.denom
-    nrational2,drational2=rational2.number,rational2.denom
-    return Rational(nrational1*drational2+nrational2*drational1,drational1*drational2)
+# def MergeRlist(rlist1,rlist2):
+#     if len_rlist(rlist1)==0:
+#         return rlist2
+#     else:
+#         return make_rlist(first(rlist1),MergeRlist(rest(rlist1),rlist2))
 
 
-def AddInt(int1,int2):
-    return int1+int2
+# def AddRational(rational1,rational2):
+#     nrational1,drational1=rational1.number,rational1.denom
+#     nrational2,drational2=rational2.number,rational2.denom
+#     return Rational(nrational1*drational2+nrational2*drational1,drational1*drational2)
 
 
-def SumIntRational(int1,rational2):
-    nrational2,drational2=rational2.number,rational2.denom
-    return Rational(int1*drational2+nrational2,drational2)
+# def AddInt(int1,int2):
+#     return int1+int2
+
+
+# def SumIntRational(int1,rational2):
+#     nrational2,drational2=rational2.number,rational2.denom
+#     return Rational(int1*drational2+nrational2,drational2)
 
 
 
-def MUltiplyRlist(n,l1):
-      temp=l1
-      temp2=()
-      for i in range(n-1):
-          temp2=MergeRlist(temp,l1)
-          temp=temp2
-          temp2=l1
+# def MUltiplyRlist(n,l1):
+#       temp=l1
+#       temp2=()
+#       for i in range(n-1):
+#           temp2=MergeRlist(temp,l1)
+#           temp=temp2
+#           temp2=l1
 
-      return temp
+#       return temp
 
 
-def MulRational(r1,r2):
-     nr1,dr1=r1.number,r1.denom
-     nr2,dr2=r2.number,r2.denom
-     return Rational(nr1*nr2,dr1*dr2)
+# def MulRational(r1,r2):
+#      nr1,dr1=r1.number,r1.denom
+#      nr2,dr2=r2.number,r2.denom
+#      return Rational(nr1*nr2,dr1*dr2)
 
-def MulInt(n1,n2):
-    return n1*n2
+# def MulInt(n1,n2):
+#     return n1*n2
 
-def MulIntRational(n,r1):
-     nr1,dr1=r1.number,r1.denom
-     return Rational(n*nr1,dr1)
+# def MulIntRational(n,r1):
+#      nr1,dr1=r1.number,r1.denom
+#      return Rational(n*nr1,dr1)
 
-def type_tag(x):
-		return type_tag.tags[type(x)]
+# def type_tag(x):
+# 		return type_tag.tags[type(x)]
 
-type_tag.tags={Rational:'rational',tuple:'rlist',int:'int'}
+# type_tag.tags={Rational:'rational',tuple:'rlist',int:'int'}
 
-def add(z1,z2):
-    types=(type_tag(z1),type_tag(z2))
-    return add.implementations[types](z1,z2)
+# def add(z1,z2):
+#     types=(type_tag(z1),type_tag(z2))
+#     return add.implementations[types](z1,z2)
 
-def mul(z1,z2):
-    types=(type_tag(z1),type_tag(z2))
-    return mul.implementations[types](z1,z2)
+# def mul(z1,z2):
+#     types=(type_tag(z1),type_tag(z2))
+#     return mul.implementations[types](z1,z2)
 
-def apply(operator_name, x, y):
-		tags = (type_tag(x), type_tag(y))
-		key = (operator_name, tags)
-		return apply.implementations[key](x, y)
+# def apply(operator_name, x, y):
+# 		tags = (type_tag(x), type_tag(y))
+# 		key = (operator_name, tags)
+# 		return apply.implementations[key](x, y)
 
-add.implementations={}
+# add.implementations={}
 
-apply.implementations={('add',('rational','rlist')):AppendRlist,
-                       ('add',('rlist','rlist')):MergeRlist,
-                       ('add',('rational','rational')):AddRational,
-                       ('add',('int','int')):AddInt,
-                       ('add',('int','rational')):SumIntRational,
-                       ('mul',('int','rlist')):MUltiplyRlist,
-                       ('mul',('rational','rational')):MulRational,
-                       ('mul',('int','int')):MulInt,
-                       ('mul',('int','rational')):MulIntRational,
+# apply.implementations={('add',('rational','rlist')):AppendRlist,
+#                        ('add',('rlist','rlist')):MergeRlist,
+#                        ('add',('rational','rational')):AddRational,
+#                        ('add',('int','int')):AddInt,
+#                        ('add',('int','rational')):SumIntRational,
+#                        ('mul',('int','rlist')):MUltiplyRlist,
+#                        ('mul',('rational','rational')):MulRational,
+#                        ('mul',('int','int')):MulInt,
+#                        ('mul',('int','rational')):MulIntRational,
                        
-                       ('+',('rational','rlist')):AppendRlist,
-                       ('+',('rlist','rlist')):MergeRlist,
-                       ('+',('rational','rational')):AddRational,
-                       ('+',('int','int')):AddInt,
-                       ('+',('int','rational')):SumIntRational,
-                       ('*',('int','rlist')):MUltiplyRlist,
-                       ('*',('rational','rational')):MulRational,
-                       ('*',('int','int')):MulInt,
-                       ('*',('int','rational')):MulIntRational}
+#                        ('+',('rational','rlist')):AppendRlist,
+#                        ('+',('rlist','rlist')):MergeRlist,
+#                        ('+',('rational','rational')):AddRational,
+#                        ('+',('int','int')):AddInt,
+#                        ('+',('int','rational')):SumIntRational,
+#                        ('*',('int','rlist')):MUltiplyRlist,
+#                        ('*',('rational','rational')):MulRational,
+#                        ('*',('int','int')):MulInt,
+#                        ('*',('int','rational')):MulIntRational}
 
 
-L1=make_rlist(1,None)
-R1=Rational(2,4)
-R2=Rational(3,2)
-print(AppendRlist(R1,L1))
-L2=make_rlist(5,make_rlist(6,None))
-print(MergeRlist(L1,L2))
-print(AddRational(R1,R2)) 
-print(apply('*',4,L2))
+# L1=make_rlist(1,None)
+# R1=Rational(2,4)
+# R2=Rational(3,2)
+# print(AppendRlist(R1,L1))
+# L2=make_rlist(5,make_rlist(6,None))
+# print(MergeRlist(L1,L2))
+# print(AddRational(R1,R2)) 
+# print(apply('*',4,L2))
