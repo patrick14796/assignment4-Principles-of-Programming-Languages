@@ -104,17 +104,20 @@ def make_Student_class( ):
         return {'Department':self['get']('Department'),'Average':self['get']('Average'),'Studying Seniority':self['get']('Studying Seniority')}
 
     def __str__(self):
-         return ((Person(self['get']('__str__')()))+'\n'
+         return (
+                 (Person['get']('__str__')(self))+'\n'
                  'Learning:'+self['get']('Department')+'\n'
                  'Avg:' +str(self['get']('Average'))+'\n'
-                 'Studying Seniority:'+str(self['get']('Studying Seniority')))
+                 'Studying Seniority:'+str(self['get']('Studying Seniority'))
+                 )
 
-    return make_class({'__init__': __init__, '__repr__':__repr__ , '__str__':__str__})
+    return make_class({'__init__': __init__, '__repr__':__repr__ , '__str__':__str__},Person)
 
 
-def make_Faculty_class(personClass):
+def make_Faculty_class():
 
-    def __init__(self,_Teaching,_Salary,_Seniority):
+    def __init__(self,_FirstName,_LastName,_DOB,_ID,_Teaching,_Salary,_Seniority):
+        Person['get']('__init__',)(self,_FirstName,_LastName,_DOB,_ID)
         self['set']('Teaching',_Teaching)
         self['set']('Salary',_Salary)
         self['set']('Teaching Seniority',_Seniority)
@@ -128,44 +131,50 @@ def make_Faculty_class(personClass):
                 'Teaching Seniority:' + str(self['get']('Teaching Seniority')))
 
     def __str__(self):
-        return ((personClass['get']('__str__')())+'\n'
+        return ((Person['get']('__str__')(self))+'\n'
                 'Teaching:' + self['get']('Teaching')+ '\n'
                 'Salary:' + str(self['get']('Salary'))+'\n'
                 'Teaching Seniority:' + str(self['get']('Teaching Seniority')))
    
-    return make_class({'__init__': __init__, '__repr__':__repr__ , '__str__':__str__,'attr':attr})
+    return make_class({'__init__': __init__, '__repr__':__repr__ , '__str__':__str__,'attr':attr},Person)
 
 
 
-def make_TA_class(studentClass,facultyClass):
+def make_TA_class():
     
-    def __init__(self):
-        pass
+    def __init__(self,_FirstName,_LastName,_DOB,_ID,_Department,_Average,_SSeniority,_Teaching,_Salary,_TSeniority):
+        Student['get']('__init__')(self,_FirstName,_LastName,_DOB,_ID,_Department,_Average,_SSeniority)
+        Faculty['get']('__init__')(self,_FirstName,_LastName,_DOB,_ID,_Teaching,_Salary,_TSeniority)
     
     def __repr__(self):
         return 
       
     def __str__(self):
-       return ((studentClass['get']('__str__')())+'\n'
-               +
-               facultyClass['get']('attr')() + '\n')
+       return (
+           Student['get']('__str__')(self) +'\n' +
+           Faculty['get']('attr')(self)
+       )
     
-    return make_class({'__init__': __init__, '__repr__':__repr__ , '__str__':__str__})
+    return make_class({'__init__': __init__, '__repr__':__repr__ , '__str__':__str__},Student)
 
 
 
 Date=make_MyDate_class()
-myDate=Date['new'](12,6,1987)
-
-
 Person=make_Person_class()
-
-
 Student=make_Student_class()
+Faculty=make_Faculty_class()
+TA=make_TA_class()
+myDate=Date['new'](12,6,1987)
+myDate1=Date['new'](20,2,1980)
+myDate2=Date['new'](31,12,1999)
+
+
 Dani=Student['new']('Dani','israeli',myDate,312131145,'Software Engineering' ,85.3 ,4)
-
-print(Dani['get']('__str__')())
-
+Yossi=Faculty['new']('Yossi','Levi',myDate1,123456789,'Science',18000,2)
+Ben=TA['new']('Ben','Shvili',myDate2,987654312,'Chemistry',93,3,'Chemistry',6000,0.3)
+#print(Dani['get']('__str__')())
+#print(Yossi['get']('__str__')())
+print(Ben['get']('__str__')())
 
 
 
