@@ -188,7 +188,7 @@ def make_Faculty_class():
                 'Salary:' + str(self['get']('Salary'))+'\n'
                 'Teaching Seniority:' + str(self['get']('Teaching Seniority')))
    
-    return make_class({'__init__': __init__, '__repr__':__repr__ , '__str__':__str__,'attr':attr},Person)
+    return make_class({'__init__': __init__, '__repr__':__repr__ , '__str__':__str__,'attr':attr,'setTeaching':setTeaching,'setSalary':setSalary,'setSeniority':setSeniority,'getTeaching':getTeaching,'getSalary':getSalary,'getSeniority':getSeniority},Person)
 
 
 
@@ -224,10 +224,10 @@ Omri=Person['new']('Omri','Halabi',myDate,333333333)
 Dani=Student['new']('Dani','israeli',myDate,312131145,'Software Engineering' ,85.3 ,4)
 Yossi=Faculty['new']('Yossi','Levi',myDate1,123456789,'Science',18000,2)
 Ben=TA['new']('Ben','Shvili',myDate2,987654312,'Chemistry',93,3,'Chemistry',6000,0.3)
-#print(Ben['get']('__repr__')())
-#print(Dani['get']('__str__')())
-#print(Yossi['get']('__str__')())
-#print(Ben['get']('__str__')())
+print(Ben['get']('__repr__')())
+print(Dani['get']('__str__')())
+print(Yossi['get']('__str__')())
+print(Ben['get']('__str__')())
 
 
 
@@ -377,12 +377,12 @@ apply.implementations={('add',('rational','rlist')):AppendRlist,
                         ('*',('int','int')):MulInt,
                         ('*',('int','rational')):MulIntRational}
 
-#print("\n")
+print("\n")
 L1=make_rlist(1,None)
 R1=Rational(2,4)
 R2=Rational(3,2)
-#print(AppendRlist(R1,L1))
+print(AppendRlist(R1,L1))
 L2=make_rlist(5,make_rlist(6,None))
-#print(MergeRlist(L1,L2))
-#print(AddRational(R1,R2)) 
-#print(apply('*',4,L2))
+print(MergeRlist(L1,L2))
+print(AddRational(R1,R2)) 
+print(apply('*',4,L2))
