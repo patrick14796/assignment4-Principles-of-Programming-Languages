@@ -59,7 +59,21 @@ def make_MyDate_class():
             self['set']('month',_month)
         if _year >= 1900 and _year <=2100: 
             self['set']('year',_year)
-
+    def setDay(self,_day=0):
+        if _day >= 1 and _day <= 30:
+            self['set']('day',_day)
+    def setMonth(self,_month=0):
+        if _month >= 1 and _month <= 12:
+            self['set']('month',_month)
+    def setYear(self,_year=2020):
+        if _year >= 1900 and _year <=2100: 
+            self['set']('year',_year)
+    def getDay(self):
+        return self['get']('_day')
+    def getMonth(self):
+        return self['get']('month')
+    def getYear(self):
+        return self['get']('year')        
     def __repr__(self):
         return f"myDate['new']({self['get']('day')},{self['get']('month')},{self['get']('year')})"
     
@@ -67,7 +81,7 @@ def make_MyDate_class():
         return str(self['get']('day'))+'.'+str(self['get']('month'))+'.'+str(self['get']('year'))
 
 
-    return make_class({'__init__': __init__, '__repr__':__repr__ , '__str__':__str__})
+    return make_class({'__init__': __init__, '__repr__':__repr__ , '__str__':__str__,'setDay':setDay,'setMonth':setMonth,'setYear':setYear,'getDay':getDay,'getMonth':getMonth,'getYear':getYear})
 
 
 
@@ -78,7 +92,23 @@ def make_Person_class():
         self['set']('DoB',_DOB)
         if _ID>0:
             self['set']('ID',_ID)
-
+    def setFirstName(self,_FirstName):
+        self['set']('FirstName',_FirstName)
+    def setLastName(self,_LastName):
+        self['set']('LastName',_LastName)
+    def setDOB(self,_DOB):
+        self['set']('DoB',_DOB)
+    def setID(self,_ID):
+        if _ID>0:
+            self['set']('ID',_ID)
+    def getFirstName(self):
+        return self['get']('FirstName')
+    def getLastName(self):
+        return self['get']('LastName')
+    def getDOB(self):
+        return self['get']('DoB')
+    def getID(self):
+        return self['get']('ID')            
     def __repr__(self):
         return f"Person['new']('{self['get']('FirstName')}','{self['get']('LastName')}',{self['get']('DoB')['get']('__repr__')()},{self['get']('ID')})"
 
@@ -88,7 +118,7 @@ def make_Person_class():
                 'ID:'+str(self['get']('ID')))
       
             
-    return make_class({'__init__': __init__, '__repr__':__repr__ , '__str__':__str__})
+    return make_class({'__init__': __init__, '__repr__':__repr__ , '__str__':__str__,'setFirstName':setFirstName,'setLastName':setLastName,'setDOB':setDOB,'setID':setID,'getFirstName':getFirstName,'getLastName':getLastName,'getDOB':getDOB,'getID':getID})
 
 
 
@@ -99,7 +129,18 @@ def make_Student_class( ):
         self['set']('Department',_Department)
         self['set']('Average',_Average)
         self['set']('Studying Seniority',_Seniority)
-
+    def setDepartment(self,_Department):
+        self['set']('Department',_Department)
+    def setAverage(self,_Average):
+        self['set']('Average',_Average)
+    def setSSeniority(self,_Seniority):
+        self['set']('Studying Seniority',_Seniority)
+    def getDepartment(self):
+        return self['get']('Department')
+    def getAverage(self):
+        return self['get']('Average')
+    def getSSeniority(self):
+        return self['get']('Studying Seniority')
     def __repr__(self):
         return f"Student['new']('{self['get']('FirstName')}','{self['get']('LastName')}',{self['get']('DoB')['get']('__repr__')()},{self['get']('ID')},'{self['get']('Department')}',{self['get']('Average')},{self['get']('Studying Seniority')})"
 
@@ -111,7 +152,7 @@ def make_Student_class( ):
                  'Studying Seniority:'+str(self['get']('Studying Seniority'))
                  )
 
-    return make_class({'__init__': __init__, '__repr__':__repr__ , '__str__':__str__},Person)
+    return make_class({'__init__': __init__, '__repr__':__repr__ , '__str__':__str__,'setDepartment':setDepartment,'setAverage':setAverage,'setSSeniority':setSSeniority,'getDepartment':getDepartment,'getAverage':getAverage,'getSSeniority':getSSeniority},Person)
 
 
 def make_Faculty_class():
@@ -121,7 +162,18 @@ def make_Faculty_class():
         self['set']('Teaching',_Teaching)
         self['set']('Salary',_Salary)
         self['set']('Teaching Seniority',_Seniority)
-    
+    def setTeaching(self,_Teaching):
+        self['set']('Teaching',_Teaching)
+    def setSalary(self,_Salary):
+        self['set']('Salary',_Salary)
+    def setSeniority(self,_Seniority):
+        self['set']('Teaching Seniority',_Seniority)
+    def getTeaching(self):
+        return self['get']('Teaching')
+    def getSalary(self):
+        return self['get']('Salary')
+    def getSeniority(self):
+        return self['get']('Seniority')
     def __repr__(self):
         return f"Faculty['new']('{self['get']('FirstName')}','{self['get']('LastName')}',{self['get']('DoB')['get']('__repr__')()},{self['get']('ID')},'{self['get']('Teaching')}',{self['get']('Salary')},{self['get']('Teaching Seniority')})"
 
@@ -172,10 +224,10 @@ Omri=Person['new']('Omri','Halabi',myDate,333333333)
 Dani=Student['new']('Dani','israeli',myDate,312131145,'Software Engineering' ,85.3 ,4)
 Yossi=Faculty['new']('Yossi','Levi',myDate1,123456789,'Science',18000,2)
 Ben=TA['new']('Ben','Shvili',myDate2,987654312,'Chemistry',93,3,'Chemistry',6000,0.3)
-print(Ben['get']('__repr__')())
-print(Dani['get']('__str__')())
-print(Yossi['get']('__str__')())
-print(Ben['get']('__str__')())
+#print(Ben['get']('__repr__')())
+#print(Dani['get']('__str__')())
+#print(Yossi['get']('__str__')())
+#print(Ben['get']('__str__')())
 
 
 
@@ -325,12 +377,12 @@ apply.implementations={('add',('rational','rlist')):AppendRlist,
                         ('*',('int','int')):MulInt,
                         ('*',('int','rational')):MulIntRational}
 
-print("\n")
+#print("\n")
 L1=make_rlist(1,None)
 R1=Rational(2,4)
 R2=Rational(3,2)
-print(AppendRlist(R1,L1))
+#print(AppendRlist(R1,L1))
 L2=make_rlist(5,make_rlist(6,None))
-print(MergeRlist(L1,L2))
-print(AddRational(R1,R2)) 
-print(apply('*',4,L2))
+#print(MergeRlist(L1,L2))
+#print(AddRational(R1,R2)) 
+#print(apply('*',4,L2))
